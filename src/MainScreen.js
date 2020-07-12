@@ -7,10 +7,11 @@ import {
   Button,
   ScrollView,
 } from 'react-native'
-import { TextInput } from 'react-native-paper'
+import { TextInput, ActivityIndicator } from 'react-native-paper'
 import { AntDesign } from '@expo/vector-icons'
 import CardList from './CardList'
 import axios from 'axios'
+import COLORS from '../constants/colors'
 
 const { height, width } = Dimensions.get('window')
 
@@ -44,13 +45,13 @@ const MainScreen = () => {
       style={{
         justifyContent: 'center',
         marginTop: 0.05 * height,
-        padding: 0.1 * width,
+        padding: 16,
       }}
     >
       <TextInput
         style={{ marginBottom: 0.05 * height }}
         label="Search"
-        theme={{ colors: { primary: 'red' }, roundness: 5 }}
+        theme={{ colors: { primary: COLORS.RUST }, roundness: 5 }}
         mode="outlined"
         value={searchTerm}
         onChangeText={(text) => {
@@ -60,44 +61,37 @@ const MainScreen = () => {
 
       <Button
         title="Search"
-        disabled={searchTerm ? false : true}
-        color="red"
+        disabled={searchTerm && !loading ? false : true}
+        color={COLORS.RUST}
         onPress={() => {
           callApi(searchTerm)
         }}
       />
-
-      {res !== null || undefined ? (
-        <ScrollView style={{ marginTop: 0.05 * height }}>
+      {loading ? (
+        <ActivityIndicator
+          animating={true}
+          color={COLORS.GREEN}
+          style={{ padding: 25 }}
+        />
+      ) : res !== null || undefined ? (
+        <ScrollView
+          style={{ marginVertical: 0.05 * height }}
+          showsVerticalScrollIndicator={false}
+        >
           {res.length > 0 ? (
             <>
               <Text
                 style={{
-                  fontWeight: 'bold',
+                  // fontWeight: 'bold',
                   alignSelf: 'center',
                   marginBottom: 0.02 * height,
+                  // color: COLORS.GREEN,
+                  // fontSize: 16,
                 }}
               >
-                Results
+                Showing {res.length} Results for "{searchTerm}"
               </Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  flex: 1,
-                  alignItems: 'center',
-                  borderWidth: 1,
-                }}
-              >
-                <View style={{ flex: 1, alignItems: 'center', padding: 16 }}>
-                  <Text style={{ fontWeight: 'bold' }}>Artist Name</Text>
-                </View>
-                <View style={{ flex: 1, alignItems: 'center' }}>
-                  <Text style={{ fontWeight: 'bold' }}>Collection Name</Text>
-                </View>
-                <View style={{ flex: 1, alignItems: 'center' }}>
-                  <Text style={{ fontWeight: 'bold' }}>Track Name</Text>
-                </View>
-              </View>
+
               {res.map((entry) => (
                 <CardList entry={entry} key={entry.trackId} />
               ))}

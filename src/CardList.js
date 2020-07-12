@@ -1,28 +1,55 @@
 import React from 'react'
 import { Text, View, Dimensions, Button } from 'react-native'
+import { Card, Title, Paragraph } from 'react-native-paper'
+import COLORS from '../constants/colors'
 
 const CardList = (props) => {
   const { entry } = props
-  //   console.log(entry.trackId)
+  console.log(entry)
   return (
-    <View
+    // <View
+    //   style={{
+    //     flexDirection: 'row',
+    //     flex: 1,
+    //     alignItems: 'center',
+    //     borderWidth: 1,
+    //   }}
+    // >
+    //   <View style={{ flex: 1, alignItems: 'center', padding: 11 }}>
+    //     <Text>{entry.artistName}</Text>
+    //   </View>
+    //   <View style={{ flex: 1, alignItems: 'center', padding: 11 }}>
+    //     <Text>{entry.collectionName}</Text>
+    //   </View>
+    //   <View style={{ flex: 1, alignItems: 'center', padding: 11 }}>
+    //     <Text>{entry.trackName}</Text>
+    //   </View>
+    // </View>
+    <Card
       style={{
-        flexDirection: 'row',
-        flex: 1,
-        alignItems: 'center',
-        borderWidth: 1,
+        borderWidth: 0.5,
+        borderColor: COLORS.PERFECT_GREY,
+        borderRadius: 5,
+        elevation: 7,
+        marginVertical: 5,
       }}
     >
-      <View style={{ flex: 1, alignItems: 'center', padding: 11 }}>
-        <Text>{entry.artistName}</Text>
+      <View style={{ flex: 1, flexDirection: 'row' }}>
+        <View style={{ flex: 1 }}>
+          <Card.Cover
+            source={{ uri: entry.artworkUrl100 }}
+            style={{ height: 100, width: 100 }}
+          />
+        </View>
+        <View style={{ marginStart: 11, flex: 3 }}>
+          <Card.Content>
+            <Title style={{ fontSize: 16 }}>{entry.trackName}</Title>
+            <Paragraph>Artist: {entry.artistName}</Paragraph>
+            <Paragraph>{entry.collectionName}</Paragraph>
+          </Card.Content>
+        </View>
       </View>
-      <View style={{ flex: 1, alignItems: 'center', padding: 11 }}>
-        <Text>{entry.collectionName}</Text>
-      </View>
-      <View style={{ flex: 1, alignItems: 'center', padding: 11 }}>
-        <Text>{entry.trackName}</Text>
-      </View>
-    </View>
+    </Card>
   )
 }
 export default CardList
