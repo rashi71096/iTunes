@@ -1,0 +1,10 @@
+const COLORS = {
+  RUST: '#BF3413',
+  PERFECT_GREY: '#808080',
+  PURE_WHITE: '#FFFFFF',
+  RICH_BLACK: '#020202',
+  ERROR_MESSAGE: '#FF0000',
+  GREEN: '#32CD32',
+}
+
+export default COLORS
