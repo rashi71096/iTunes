@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Dimensions, Button } from 'react-native'
+import { View } from 'react-native'
 import { Card, Title, Paragraph } from 'react-native-paper'
 import COLORS from '../constants/colors'
 
