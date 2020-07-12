@@ -5,26 +5,7 @@ import COLORS from '../constants/colors'
 
 const CardList = (props) => {
   const { entry } = props
-  console.log(entry)
   return (
-    // <View
-    //   style={{
-    //     flexDirection: 'row',
-    //     flex: 1,
-    //     alignItems: 'center',
-    //     borderWidth: 1,
-    //   }}
-    // >
-    //   <View style={{ flex: 1, alignItems: 'center', padding: 11 }}>
-    //     <Text>{entry.artistName}</Text>
-    //   </View>
-    //   <View style={{ flex: 1, alignItems: 'center', padding: 11 }}>
-    //     <Text>{entry.collectionName}</Text>
-    //   </View>
-    //   <View style={{ flex: 1, alignItems: 'center', padding: 11 }}>
-    //     <Text>{entry.trackName}</Text>
-    //   </View>
-    // </View>
     <Card
       style={{
         borderWidth: 0.5,
