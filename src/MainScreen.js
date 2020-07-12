@@ -1,13 +1,6 @@
 import React, { useState } from 'react'
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Button,
-  ScrollView,
-} from 'react-native'
-import { TextInput, ActivityIndicator, Appbar } from 'react-native-paper'
+import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native'
+import { TextInput, Appbar, Button } from 'react-native-paper'
 import { AntDesign } from '@expo/vector-icons'
 import CardList from './CardList'
 import axios from 'axios'
@@ -17,9 +10,9 @@ const { height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 0.02 * height,
+    padding: 16,
   },
 })
 
@@ -46,15 +39,9 @@ const MainScreen = () => {
         <Appbar.Action icon="magnify" />
         <Appbar.Content title="Songs" subtitle="Search Track" />
       </Appbar.Header>
-      <View
-        style={{
-          justifyContent: 'center',
-          marginTop: 0.05 * height,
-          padding: 16,
-        }}
-      >
+      <View style={styles.container}>
         <TextInput
-          style={{ marginBottom: 0.05 * height }}
+          style={{ marginBottom: 0.02 * height }}
           label="Search"
           theme={{ colors: { primary: COLORS.RUST }, roundness: 5 }}
           mode="outlined"
@@ -63,21 +50,37 @@ const MainScreen = () => {
             setSearchTerm(text)
           }}
         />
-
         <Button
-          title="Search"
+          icon="magnify"
+          theme={{ colors: { primary: COLORS.RUST }, roundness: 5 }}
+          loading={loading}
+          mode="text"
           disabled={searchTerm && !loading ? false : true}
-          color={COLORS.RUST}
           onPress={() => {
             callApi(searchTerm)
           }}
-        />
+        >
+          Search
+        </Button>
         {loading ? (
-          <ActivityIndicator
-            animating={true}
-            color={COLORS.GREEN}
-            style={{ padding: 25 }}
-          />
+          <>
+            <AntDesign
+              name="hourglass"
+              size={24}
+              color={COLORS.PERFECT_GREY}
+              style={{ alignSelf: 'center', padding: 11 }}
+            />
+
+            <Text
+              style={{
+                fontWeight: 'bold',
+                textAlign: 'center',
+                color: COLORS.PERFECT_GREY,
+              }}
+            >
+              Please Wait!
+            </Text>
+          </>
         ) : res !== null || undefined ? (
           <ScrollView
             style={{ marginVertical: 0.05 * height }}

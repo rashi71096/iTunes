@@ -3,8 +3,7 @@ import { View } from 'react-native'
 import { Card, Title, Paragraph } from 'react-native-paper'
 import COLORS from '../constants/colors'
 
-const CardList = (props) => {
-  const { entry } = props
+const CardList = ({ entry }) => {
   return (
     <Card
       style={{
